@@ -4,15 +4,14 @@ from collections import OrderedDict
 
 PITCHES = ['C','C#/Db','D','Eb/D#','E','F','F#/Gb','G','G#/Ab','A','Bb','B']
 
-MODES = ['MAJOR','MELODICMINOR','MELODICMINOR']
+MODES = ['Major','Minor']
 
-MAJOR = [0,2,4,5,7,9,11]
-NATURALMINOR = [0,2,3,5,7,8,10]
-MELODICMINOR = [0,2,3,5,7,8,11]
+Major = [0,2,4,5,7,9,11]
+Minor = [0,2,3,5,7,9,11]
 
 class scale:
 
-    def __init__(self,key,mode='MAJOR'):
+    def __init__(self,key,mode='Major'):
         self.scale = self.__generateScale(key,mode)
         self.chords = self.__generateDiatonicChords()
         self.chordTypes = self.__applyChordTypes()
@@ -27,12 +26,10 @@ class scale:
             partScale.append(i)
         newScaleIds = list(map(lambda x: PITCHES[x], partScale))
 
-        if mode == 'MAJOR':
-            newScale = list(map(lambda x: newScaleIds[x], MAJOR ))
-        elif mode == 'NATURALMINOR':
-            newScale = list(map(lambda x: newScaleIds[x], NATURALMINOR ))
-        elif mode == 'MELODICMINOR':
-            newScale = list(map(lambda x: newScaleIds[x], MELODICMINOR))
+        if mode == 'Major':
+            newScale = list(map(lambda x: newScaleIds[x], Major ))
+        elif mode == 'Minor':
+            newScale = list(map(lambda x: newScaleIds[x], Minor ))
         return newScale
 
     def __generateDiatonicChords(self):
