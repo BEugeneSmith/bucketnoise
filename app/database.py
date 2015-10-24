@@ -1,3 +1,6 @@
-from sqlalchemy import create_engine,MetaData,Table
-engine = create_engine('sqlite:////home/es/Desktop/scales/scales.db', convert_unicode=True)
+from sqlalchemy import create_engine,MetaData
+
+engine = create_engine('postgresql://postgres:Seattle1989@localhost/postgres',convert_unicode=True)
+
+
 metadata = MetaData(bind=engine)
