@@ -2,3 +2,4 @@ models.py
 *.pyc
 sqsetup
 *.csv
+venv

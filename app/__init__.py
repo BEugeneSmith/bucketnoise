@@ -1,5 +1,6 @@
+import os
 from flask import Flask,render_template
-from app.day import *
+from app.day import current_day
 
 app = Flask(__name__)
 
