@@ -11,9 +11,9 @@ def current_date():
         name = newScale.scale_name
         engine.execute('insert into days values(1,current_date,:1)',name)
 
-        return select_piece(newScale)
+        return select_piece(name)
     else:
-        return select_piece(newScale)
+        return select_piece(newScale.scale_name)
 
 def choose_scale():
     s = choice(PITCHES)
