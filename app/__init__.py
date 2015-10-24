@@ -8,4 +8,4 @@ app = Flask(__name__)
 def index():
     p = current_date()
 
-    return render_template('index.html',n,)
+    return render_template('index.html',n=p)
