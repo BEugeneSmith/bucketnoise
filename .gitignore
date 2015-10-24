@@ -1,0 +1,4 @@
+models.py
+*.pyc
+sqsetup
+*.csv
