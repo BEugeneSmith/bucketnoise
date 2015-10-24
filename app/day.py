@@ -26,7 +26,7 @@ def select_piece(k):
     result = engine.execute('select * from pieces where key like %s order by random() limit 1',key[0]).first()
 
     if result == None or result == []:
-        return (newScale + ' is unfortunately not in the database. Check out some recommendations below, though.')
+        return [(newScale + ' is unfortunately not in the database. Check out some recommendations below, though.'),k]
     else:
         s = ("%s (%i) by %s, Op.%i") % (result[1],result[5],result[3],result[6])
-        return s
+        return [s,k]
