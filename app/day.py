@@ -4,14 +4,14 @@ from app.database import *
 from app.scale import *
 
 def current_date():
-    result = engine.execute('SELECT current_date').first()
+    today = engine.execute('SELECT current_date').first()
     newScale = choose_scale()
+
+    result = engine.execute('SELECT * FROM days where day = %s',today[0]).first()
 
     if result == None or result == []:
         name = newScale.scale_name
-        engine.execute('INSERT INTO days VALUES(((SELECT COUNT(*) FROM days)+1),current_date,%s)',name)
-
-
+        engine.execute('INSERT INTO days VALUES(((SELECT COUNT(*) FROM days)+1),%s,%s)',today[0],name)
 
         return select_piece(name)
     else:
@@ -24,13 +24,16 @@ def choose_scale():
     return scale(s,m)
 
 def select_piece(k):
-    key = engine.execute('SELECT  scale FROM days WHERE day = current_date').first()
-    result = engine.execute('SELECT * FROM pieces WHERE key LIKE %s ORDER BY random() LIMIT 1',key[0]).first()
+    key = engine.execute('SELECT scale FROM days WHERE day = current_date').first()
     s = ''
+    testKey = ("'"+key[0]+"'")
+
+    query = ("SELECT * FROM pieces WHERE key = %s ORDER BY random() LIMIT 1" % (testKey))
+    result = engine.execute(query).first()
 
     if result == None or result == []:
-        s = ('%s is unfortunately not in the database. Check out some recommendations below, though.' % (k))
+        s = ("%s is unfortunately not in the database. Check out some recommendations below, though." % (k))
     else:
         s = ("%s (%i) by %s, Op.%i") % (result[1],result[5],result[3],result[6])
 
-    return [s,k]
+    return [s,k,key[0]]
