@@ -33,7 +33,12 @@ def select_piece(k):
 
     if result == None or result == []:
         s = ("%s is unfortunately not in the database. Check out some recommendations below, though." % (k))
+        result = ['https://www.youtube.com/watch?v=AeJX7fxz-f4']
     else:
         s = ("%s (%i) by %s, Op.%i") % (result[1],result[5],result[3],result[6])
 
-    return [s,k,key[0]]
+    video = ("'"+result[8]+"'")
+    print (result[8])
+    print (video)
+
+    return [s,k,key[0],result[8]]

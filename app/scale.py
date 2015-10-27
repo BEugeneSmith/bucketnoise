@@ -1,5 +1,3 @@
-# TODO: add method to correctly output the key.
-
 from collections import OrderedDict
 
 PITCHES = ['C','C#/Db','D','Eb/D#','E','F','F#/Gb','G','G#/Ab','A','Bb','B']
@@ -12,23 +10,25 @@ Minor = [0,2,3,5,7,9,11]
 class scale:
 
     def __init__(self,key,mode='Major'):
-        self.scale = self.__generateScale(key,mode)
+        self.key = key
+        self.mode = mode
+        self.scale = self.__generateScale()
         self.chords = self.__generateDiatonicChords()
         self.chordTypes = self.__applyChordTypes()
 
         self.scale_name = self.scale[0] + ' ' + mode
 
-    def __generateScale(self,key,mode='MAJOR'):
+    def __generateScale(self):
         ''' generates given a pitch and modern mode '''
-        keyId = PITCHES.index(key)
+        keyId = PITCHES.index(self.key)
         partScale = list(range(keyId,len(PITCHES)))
         for i in range(0,keyId):
             partScale.append(i)
         newScaleIds = list(map(lambda x: PITCHES[x], partScale))
 
-        if mode == 'Major':
+        if self.mode == 'Major':
             newScale = list(map(lambda x: newScaleIds[x], Major ))
-        elif mode == 'Minor':
+        elif self.mode == 'Minor':
             newScale = list(map(lambda x: newScaleIds[x], Minor ))
         return newScale
 
