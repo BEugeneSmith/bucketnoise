@@ -4,6 +4,7 @@ from app.database import *
 from app.scale import *
 
 def current_date():
+    ''' returns scale for the current date '''
     today = engine.execute('SELECT current_date').first()
     newScale = choose_scale()
 
@@ -18,12 +19,14 @@ def current_date():
         return select_piece(newScale.scale_name)
 
 def choose_scale():
+    ''' returns random scale out of 24 '''
     s = choice(PITCHES)
     m = choice(MODES)
 
     return scale(s,m)
 
 def select_piece(k):
+    ''' returns piece '''
     key = engine.execute('SELECT scale FROM days WHERE day = current_date').first()
     s = ''
     testKey = ("'"+key[0]+"'")
@@ -38,7 +41,5 @@ def select_piece(k):
         s = ("%s (%i) by %s, Op.%i") % (result[1],result[5],result[3],result[6])
 
     video = ("'"+result[8]+"'")
-    print (result[8])
-    print (video)
 
     return [s,k,key[0],result[8]]

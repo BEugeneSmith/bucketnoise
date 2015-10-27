@@ -42,6 +42,7 @@ class scale:
         return scaleDict
 
     def __determineChordType(self,chord):
+        ''' determine chord type for a given chord '''
         chromaticScale = PITCHES+PITCHES
 
         d1 = chromaticScale.index(chord[0])
@@ -67,6 +68,7 @@ class scale:
             return 'diminished'
 
     def __applyChordTypes(self):
+        ''' apply chord to all scale degrees '''
         chordType = OrderedDict()
         for degree in self.chords.keys():
             chordType[degree] = self.__determineChordType(self.chords[degree])
