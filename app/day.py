@@ -40,6 +40,11 @@ def select_piece(k):
     else:
         s = ("%s (%i) by %s, Op.%i") % (result[1],result[5],result[3],result[6])
 
-    video = ("'"+result[8]+"'")
+    video_key = ''
 
-    return [s,k,key[0],result[8]]
+    try:
+        video_key = ("'"+result[8]+"'")
+    except:
+        video_key = 'na'
+
+    return [s,k,key[0],video_key]
