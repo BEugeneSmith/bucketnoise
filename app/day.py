@@ -27,24 +27,29 @@ def choose_scale():
 
 def select_piece(k):
     ''' returns piece '''
+
+    join_tbl = " SELECT pn.piece_name,pd.key,pd.composer,pd.year_completed,pd.opus_number,pd.number,pl.video_link,pl.imslp_link FROM piece_name pn JOIN piece_data pd ON pn.piece_id=pd.piece_id JOIN piece_links pl ON pn.piece_id=pl.piece_id "
     key = engine.execute('SELECT scale FROM days WHERE day = current_date').first()
     s = ''
     testKey = ("'"+key[0]+"'")
 
-    query = ("SELECT * FROM pieces WHERE key = %s ORDER BY random() LIMIT 1" % (testKey))
+    query = ("SELECT * FROM (%s) s WHERE key = %s ORDER BY random() LIMIT 1 " % (join_tbl,testKey))
     result = engine.execute(query).first()
 
     if result == None or result == []:
         s = ("%s is unfortunately not in the database. Check out some recommendations below, though." % (k))
         result = ['https://www.youtube.com/watch?v=AeJX7fxz-f4']
     else:
-        s = ("%s (%i) by %s, Op.%i") % (result[1],result[5],result[3],result[6])
+        if result[4] == 10000:
+            s = ("%s (%i) by %s") % (result[0],result[3],result[2])
+        else:
+            s = ("%s (%i) by %s, Op.%i") % (result[0],result[3],result[2],result[4])
 
     video_key = ''
 
     try:
-        video_key = ("'"+result[8]+"'")
+        video_key = ("'"+result[6]+"'")
     except:
-        video_key = 'na'
+        video_key = 'JNsKvZo6MDs'
 
     return [s,k,key[0],video_key]
