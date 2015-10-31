@@ -7,6 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     p = current_date()
+    print (p[-1])
 
     return render_template('index.html',n=p)
 
