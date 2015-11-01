@@ -28,7 +28,7 @@ def choose_scale():
 def select_piece(k):
     ''' returns piece '''
 
-    join_tbl = " SELECT pn.piece_name,pd.key,pd.composer,pd.year_completed,pd.opus_number,pd.number,pl.video_link,pl.imslp_link FROM piece_name pn JOIN piece_data pd ON pn.piece_id=pd.piece_id JOIN piece_links pl ON pn.piece_id=pl.piece_id "
+    join_tbl = "SELECT pn.piece_name,pd.key,pd.composer,pd.year_completed,pd.opus_number,pd.number,pl.video_link,pl.imslp_link FROM piece_name pn JOIN piece_data pd ON pn.piece_id=pd.piece_id JOIN piece_links pl ON pn.piece_id=pl.piece_id"
     key = engine.execute('SELECT scale FROM days WHERE day = current_date').first()
     s = ''
     testKey = ("'"+key[0]+"'")
