@@ -1,6 +1,6 @@
 from random import choice
 
-from app.database import *
+from app.database_test import *
 from app.scale import *
 
 def current_date():
@@ -47,8 +47,9 @@ def select_piece(k):
     video_key = ''
 
     if result[6] != '':
-        video_key = ("'"+result[6]+"'")
+        video_key = (result[6])
     else:
         video_key = 'JNsKvZo6MDs'
+
 
     return [s,k,key[0],video_key]
