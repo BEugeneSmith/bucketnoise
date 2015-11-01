@@ -1,6 +1,6 @@
 from random import choice
 
-from app.database_test import *
+from app.database import *
 from app.scale import *
 
 def current_date():
