@@ -4,3 +4,4 @@ sqsetup
 *.csv
 venv
 *_test.py*
+database_prod.py
