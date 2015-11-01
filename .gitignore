@@ -3,4 +3,4 @@ models.py
 sqsetup
 *.csv
 venv
-*_test*
+*_test.py*
